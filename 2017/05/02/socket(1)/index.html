@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="io,socket," />
 
 
 
@@ -90,16 +90,17 @@
 
 
 
-<meta name="description" content="Java Socket 编程那些事（1）前言 最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。  BIO、NIO、AIO的区别Ja">
+<meta name="description" content="前言 最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。  BIO、NIO、AIO的区别Java中的IO的方式有三种Java BIO">
+<meta name="keywords" content="io,socket">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kevin_ZGJ">
-<meta property="og:url" content="https://zgj12138.github.io/blog/2017/05/08/socket(1)/index.html">
+<meta property="og:title" content="Java Socket 编程那些事（1）">
+<meta property="og:url" content="https://zgj12138.github.io/blog/2017/05/02/socket(1)/index.html">
 <meta property="og:site_name" content="Kevin_ZGJ">
-<meta property="og:description" content="Java Socket 编程那些事（1）前言 最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。  BIO、NIO、AIO的区别Ja">
-<meta property="og:updated_time" content="2017-05-04T07:02:19.853Z">
+<meta property="og:description" content="前言 最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。  BIO、NIO、AIO的区别Java中的IO的方式有三种Java BIO">
+<meta property="og:updated_time" content="2017-05-08T04:49:35.609Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kevin_ZGJ">
-<meta name="twitter:description" content="Java Socket 编程那些事（1）前言 最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。  BIO、NIO、AIO的区别Ja">
+<meta name="twitter:title" content="Java Socket 编程那些事（1）">
+<meta name="twitter:description" content="前言 最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。  BIO、NIO、AIO的区别Java中的IO的方式有三种Java BIO">
 
 
 
@@ -127,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="https://zgj12138.github.io/blog/2017/05/08/socket(1)/"/>
+  <link rel="canonical" href="https://zgj12138.github.io/blog/2017/05/02/socket(1)/"/>
 
 
 
 
 
-  <title> | Kevin_ZGJ</title>
+  <title>Java Socket 编程那些事（1） | Kevin_ZGJ</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -272,7 +273,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://zgj12138.github.io/blog/2017/05/08/socket(1)/">
+    <link itemprop="mainEntityOfPage" href="https://zgj12138.github.io/blog/2017/05/02/socket(1)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ZGJ">
@@ -293,7 +294,7 @@
             
             
               
-                
+                Java Socket 编程那些事（1）
               
             
           </h1>
@@ -308,8 +309,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T12:40:32+08:00">
-                2017-05-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-02T23:47:44+08:00">
+                2017-05-02
               </time>
             
 
@@ -319,6 +320,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -326,7 +349,7 @@
 
           
           
-             <span id="/2017/05/08/socket(1)/" class="leancloud_visitors" data-flag-title="">
+             <span id="/2017/05/02/socket(1)/" class="leancloud_visitors" data-flag-title="Java Socket 编程那些事（1）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -354,7 +377,7 @@
       
 
       
-        <h1 id="Java-Socket-编程那些事（1）"><a href="#Java-Socket-编程那些事（1）" class="headerlink" title="Java Socket 编程那些事（1）"></a>Java Socket 编程那些事（1）</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。</p>
 </blockquote>
 <h2 id="BIO、NIO、AIO的区别"><a href="#BIO、NIO、AIO的区别" class="headerlink" title="BIO、NIO、AIO的区别"></a>BIO、NIO、AIO的区别</h2><p>Java中的IO的方式有三种<br><strong>Java BIO</strong> ： 同步并阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。在JDK1.4以前采用这种方式<br><strong>Java NIO</strong> ： 同步非阻塞，服务器实现模式为一个请求一个线程，即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有I/O请求时才启动一个线程进行处理。<br><strong>Java AIO(NIO.2)</strong> ： 异步非阻塞，服务器实现模式为一个有效请求一个线程，客户端的I/O请求都是由OS先完成了再通知服务器应用去启动线程进行处理，</p>
@@ -400,6 +423,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/io/" rel="tag"># io</a>
+          
+            <a href="/tags/socket/" rel="tag"># socket</a>
+          
+        </div>
+      
 
       
         
@@ -409,15 +440,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/03/article-title/" rel="next" title="article title">
-                <i class="fa fa-chevron-left"></i> article title
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/02/hexo/" rel="prev" title="hexo">
+                hexo <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -500,7 +531,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -511,7 +542,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -575,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-Socket-编程那些事（1）"><span class="nav-number">1.</span> <span class="nav-text">Java Socket 编程那些事（1）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BIO、NIO、AIO的区别"><span class="nav-number">1.2.</span> <span class="nav-text">BIO、NIO、AIO的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单线程通讯"><span class="nav-number">2.</span> <span class="nav-text">单线程通讯</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程通讯"><span class="nav-number">2.1.</span> <span class="nav-text">多线程通讯</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BIO、NIO、AIO的区别"><span class="nav-number">2.</span> <span class="nav-text">BIO、NIO、AIO的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单线程通讯"><span class="nav-number"></span> <span class="nav-text">单线程通讯</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程通讯"><span class="nav-number">1.</span> <span class="nav-text">多线程通讯</span></a></li></ol></div>
             
 
           </div>
