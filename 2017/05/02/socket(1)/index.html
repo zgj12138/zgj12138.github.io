@@ -92,17 +92,17 @@
 
 
 
-<meta name="description" content="前言 最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。  BIO、NIO、AIO的区别Java中的IO的方式有三种Java BIO">
+<meta name="description" content="前言 最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。">
 <meta name="keywords" content="io,socket">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java Socket 编程那些事（1）">
 <meta property="og:url" content="https://zgj12138.github.io/blog/2017/05/02/socket(1)/index.html">
 <meta property="og:site_name" content="Kevin_ZGJ">
-<meta property="og:description" content="前言 最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。  BIO、NIO、AIO的区别Java中的IO的方式有三种Java BIO">
-<meta property="og:updated_time" content="2017-05-12T12:13:19.341Z">
+<meta property="og:description" content="前言 最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。">
+<meta property="og:updated_time" content="2017-05-15T09:26:16.452Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java Socket 编程那些事（1）">
-<meta name="twitter:description" content="前言 最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。  BIO、NIO、AIO的区别Java中的IO的方式有三种Java BIO">
+<meta name="twitter:description" content="前言 最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。">
 
 
 
@@ -382,6 +382,7 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。</p>
 </blockquote>
+<a id="more"></a>
 <h2 id="BIO、NIO、AIO的区别"><a href="#BIO、NIO、AIO的区别" class="headerlink" title="BIO、NIO、AIO的区别"></a>BIO、NIO、AIO的区别</h2><p>Java中的IO的方式有三种<br><strong>Java BIO</strong> ： 同步并阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。在JDK1.4以前采用这种方式<br><strong>Java NIO</strong> ： 同步非阻塞，服务器实现模式为一个请求一个线程，即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有I/O请求时才启动一个线程进行处理。<br><strong>Java AIO(NIO.2)</strong> ： 异步非阻塞，服务器实现模式为一个有效请求一个线程，客户端的I/O请求都是由OS先完成了再通知服务器应用去启动线程进行处理，</p>
 <p>曾经在一篇文章中看到这么很好的比喻</p>
 <blockquote>
