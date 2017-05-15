@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Tomcat," />
 
 
 
@@ -92,12 +92,17 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Kevin_ZGJ">
-<meta property="og:url" content="https://zgj12138.github.io/blog/index.html">
+<meta name="description" content="前言我们都知道Tomcat服务器是我们在学习JavaWeb中最常使用的服务器，所以了解Tomcat的配置文件显得很重要，昨天去面试的时候，被面试官问了几个关于Tomcat配置文件的几个问题， 以前配过，但是后来都忘记了，现在来回顾一下Tomcat中比较常用得到的配置文件吧 配置文件的位置Tomcat的配置文件在conf目录下，有context.xml、server.xml、tomcat-users">
+<meta name="keywords" content="Tomcat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tomcat配置">
+<meta property="og:url" content="https://zgj12138.github.io/blog/2017/05/15/Tomcat配置/index.html">
 <meta property="og:site_name" content="Kevin_ZGJ">
+<meta property="og:description" content="前言我们都知道Tomcat服务器是我们在学习JavaWeb中最常使用的服务器，所以了解Tomcat的配置文件显得很重要，昨天去面试的时候，被面试官问了几个关于Tomcat配置文件的几个问题， 以前配过，但是后来都忘记了，现在来回顾一下Tomcat中比较常用得到的配置文件吧 配置文件的位置Tomcat的配置文件在conf目录下，有context.xml、server.xml、tomcat-users">
+<meta property="og:updated_time" content="2017-05-15T05:20:12.966Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kevin_ZGJ">
+<meta name="twitter:title" content="Tomcat配置">
+<meta name="twitter:description" content="前言我们都知道Tomcat服务器是我们在学习JavaWeb中最常使用的服务器，所以了解Tomcat的配置文件显得很重要，昨天去面试的时候，被面试官问了几个关于Tomcat配置文件的几个问题， 以前配过，但是后来都忘记了，现在来回顾一下Tomcat中比较常用得到的配置文件吧 配置文件的位置Tomcat的配置文件在conf目录下，有context.xml、server.xml、tomcat-users">
 
 
 
@@ -125,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="https://zgj12138.github.io/blog/"/>
+  <link rel="canonical" href="https://zgj12138.github.io/blog/2017/05/15/Tomcat配置/"/>
 
 
 
 
 
-  <title>Kevin_ZGJ</title>
+  <title>Tomcat配置 | Kevin_ZGJ</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -156,9 +161,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -261,9 +264,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -293,10 +296,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2017/05/15/Tomcat配置/" itemprop="url">
-                  Tomcat配置
-                </a>
+                Tomcat配置
               
             
           </h1>
@@ -379,9 +379,7 @@
       
 
       
-        
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们都知道Tomcat服务器是我们在学习JavaWeb中最常使用的服务器，所以了解Tomcat的配置文件显得很重要，昨天去面试的时候，被面试官问了几个关于Tomcat配置文件的几个问题， 以前配过，但是后来都忘记了，现在来回顾一下Tomcat中比较常用得到的配置文件吧</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们都知道Tomcat服务器是我们在学习JavaWeb中最常使用的服务器，所以了解Tomcat的配置文件显得很重要，昨天去面试的时候，被面试官问了几个关于Tomcat配置文件的几个问题， 以前配过，但是后来都忘记了，现在来回顾一下Tomcat中比较常用得到的配置文件吧</p>
 <h2 id="配置文件的位置"><a href="#配置文件的位置" class="headerlink" title="配置文件的位置"></a>配置文件的位置</h2><p>Tomcat的配置文件在<code>conf</code>目录下，有<code>context.xml</code>、<code>server.xml</code>、<code>tomcat-users.xml</code>、<code>web.xml</code>这些配置文件</p>
 <h2 id="server-xml"><a href="#server-xml" class="headerlink" title="server.xml"></a>server.xml</h2><h3 id="修改端口"><a href="#修改端口" class="headerlink" title="修改端口"></a>修改端口</h3><p>如果要修改连接的端口，在<code>server.xml</code>文件的<code>Server</code>标签和<code>Connectot</code>标签下修改<br>如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Server</span> <span class="attr">port</span>=<span class="string">"8005"</span> <span class="attr">shutdown</span>=<span class="string">"SHUTDOWN"</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"8080"</span> <span class="attr">protocol</span>=<span class="string">"HTTP/1.1"</span></span></div><div class="line">           <span class="attr">connectionTimeout</span>=<span class="string">"20000"</span></div><div class="line">           <span class="attr">redirectPort</span>=<span class="string">"8443"</span> /&gt;</div><div class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"8009"</span> <span class="attr">protocol</span>=<span class="string">"AJP/1.3"</span> <span class="attr">redirectPort</span>=<span class="string">"8443"</span> /&gt;</span></div></pre></td></tr></table></figure>
@@ -391,215 +389,72 @@
 <h2 id="tomcat-users"><a href="#tomcat-users" class="headerlink" title="tomcat-users"></a>tomcat-users</h2><p><code>toncat-users.xml</code>是配置用户登录Tomcat对app进行管理的配置文件，如果我们需要登录Tomcat，这需要在改配置文件的<code>tomcat-users</code>结点下加上如下代码<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">   <span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">"manager-gui"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">"manager-script"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">user</span> <span class="attr">username</span>=<span class="string">"tomcat"</span> <span class="attr">password</span>=<span class="string">"123456"</span>  <span class="attr">roles</span>=<span class="string">"manager-gui,manager-script"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
 <p>其中，我这里配置的登录名是utomcat,密码是123456</p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <div>
+      
+        
+
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://zgj12138.github.io/blog/2017/05/02/socket(1)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ZGJ">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://opd90imnd.bkt.clouddn.com/timg.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Kevin_ZGJ">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/02/socket(1)/" itemprop="url">
-                  Java Socket 编程那些事（1）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-02T23:47:44+08:00">
-                2017-05-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/Tomcat/" rel="tag"># Tomcat</a>
           
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/05/02/socket(1)/" class="leancloud_visitors" data-flag-title="Java Socket 编程那些事（1）">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
         
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
-<p>最近在准备面试和笔试的一些东西，回去翻看了Java关于IO的基础，发现很多基础还是没有记牢固，现在回头重新学习，就从socket通讯开始吧，虽然说现在企业很少直接编写socket，都是使用一些封装好的框架，netty,mina等。不过对于这些基础的知识，还是需要掌握牢固的，对于以后学习更深的框架和笔试面试都很有裨益。</p>
-</blockquote>
-<h2 id="BIO、NIO、AIO的区别"><a href="#BIO、NIO、AIO的区别" class="headerlink" title="BIO、NIO、AIO的区别"></a>BIO、NIO、AIO的区别</h2><p>Java中的IO的方式有三种<br><strong>Java BIO</strong> ： 同步并阻塞，服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销，当然可以通过线程池机制改善。在JDK1.4以前采用这种方式<br><strong>Java NIO</strong> ： 同步非阻塞，服务器实现模式为一个请求一个线程，即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有I/O请求时才启动一个线程进行处理。<br><strong>Java AIO(NIO.2)</strong> ： 异步非阻塞，服务器实现模式为一个有效请求一个线程，客户端的I/O请求都是由OS先完成了再通知服务器应用去启动线程进行处理，</p>
-<p>曾经在一篇文章中看到这么很好的比喻</p>
-<blockquote>
-<p>如果你想吃一份宫保鸡丁盖饭：</p>
-<p>同步阻塞：你到饭馆点餐，然后在那等着，还要一边喊：好了没啊！</p>
-<p>同步非阻塞：在饭馆点完餐，就去遛狗了。不过溜一会儿，就回饭馆喊一声：好了没啊！</p>
-<p>异步阻塞：遛狗的时候，接到饭馆电话，说饭做好了，让您亲自去拿。</p>
-<p>异步非阻塞：饭馆打电话说，我们知道您的位置，一会给你送过来，安心遛狗就可以了。</p>
-</blockquote>
-<p>这里我们从最简单的BIO开始学习吧</p>
-<h2 id="单线程通讯"><a href="#单线程通讯" class="headerlink" title="单线程通讯"></a>单线程通讯</h2><p>首先我们先新建一个Server类，这个类将监听12345这个端口，等待客户端的连接,客户端与服务器连接后，客户端可以像服务器发送信息，如果发送bye，则结束通讯<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> edu.gduf.bio.socket.demo1;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.BufferedReader;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStreamReader;</div><div class="line"><span class="keyword">import</span> java.io.PrintWriter;</div><div class="line"><span class="keyword">import</span> java.net.ServerSocket;</div><div class="line"><span class="keyword">import</span> java.net.Socket;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 基于bio的socket服务器端</div><div class="line"> * </div><div class="line"> * <span class="doctag">@author</span> ZGJ</div><div class="line"> * <span class="doctag">@date</span> 2017年5月4日</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Server</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="comment">//创建一个serversocket在10000号端口监听</span></div><div class="line">		<span class="keyword">try</span> (ServerSocket server = <span class="keyword">new</span> ServerSocket(<span class="number">12345</span>)) &#123;</div><div class="line">			<span class="comment">//等待客户端连接，将一直阻塞直到有客户端连接</span></div><div class="line">		    Socket socket = server.accept();</div><div class="line">	        BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</div><div class="line">	        PrintWriter out = <span class="keyword">new</span> PrintWriter(socket.getOutputStream());</div><div class="line"></div><div class="line">	        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">	            String msg = in.readLine();</div><div class="line">	            System.out.println(msg);</div><div class="line">	            out.println(<span class="string">"Server received "</span> + msg);</div><div class="line">	            out.flush();</div><div class="line">	            <span class="keyword">if</span> (msg.equals(<span class="string">"bye"</span>)) &#123;</div><div class="line">	                <span class="keyword">break</span>;</div><div class="line">	            &#125;</div><div class="line">	        &#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这里<code>try (ServerSocket server = new ServerSocket(12345))</code>采用了java7的<code>try-with-resources</code>语法，这样写的好处是try里面声明的资源在最后都会自动关闭，而不需要我们手动关闭，简化了语法</p>
-<p>Client类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> edu.gduf.bio.socket.demo1;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.BufferedReader;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStreamReader;</div><div class="line"><span class="keyword">import</span> java.io.PrintWriter;</div><div class="line"><span class="keyword">import</span> java.net.Socket;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 基于bio的socket客户端</div><div class="line"> * </div><div class="line"> * <span class="doctag">@author</span> ZGJ</div><div class="line"> * <span class="doctag">@date</span> 2017年5月4日</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="keyword">try</span> (Socket socket = <span class="keyword">new</span> Socket(<span class="string">"127.0.0.1"</span>, <span class="number">12345</span>)) &#123;</div><div class="line">			<span class="comment">//获取socket输入流</span></div><div class="line">			BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</div><div class="line">			<span class="comment">//socket输出流</span></div><div class="line">			PrintWriter out = <span class="keyword">new</span> PrintWriter(socket.getOutputStream());</div><div class="line">			<span class="comment">//标准输入流</span></div><div class="line">			BufferedReader reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</div><div class="line">			<span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">				String msg = reader.readLine();</div><div class="line">				out.println(msg);</div><div class="line">				out.flush();</div><div class="line">				<span class="keyword">if</span> (msg.equals(<span class="string">"bye"</span>)) &#123;</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				&#125;</div><div class="line">				System.out.println(in.readLine());</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>运行结果：<br><strong>Client:</strong></p>
-<p>hello<br>Server received hello<br>haha<br>Server received haha<br>bye</p>
-<p><strong>Server:</strong><br>hello<br>haha<br>bye</p>
-<h2 id="多线程通讯"><a href="#多线程通讯" class="headerlink" title="多线程通讯"></a>多线程通讯</h2><p>我们发现，服务器只能处理一个客户端的请求，服务器处理了第一个客户端的请求之后，后续的Client就不能再连接，这个时候我们需要做一些改动，当服务器收到客户端的连接请求后，客户端的请求放在一个新的线程中去处理，而主线程仍然继续等待其他客户端的连接，这样就不会阻塞服务器处理其他客户端的请求了，只需要修改服务器的代码，客户端代码和原来的一样<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> edu.gduf.bio.socket.demo2;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.BufferedReader;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStreamReader;</div><div class="line"><span class="keyword">import</span> java.io.PrintWriter;</div><div class="line"><span class="keyword">import</span> java.net.ServerSocket;</div><div class="line"><span class="keyword">import</span> java.net.Socket;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 处理多个client的server</div><div class="line"> * <span class="doctag">@author</span> ZGJ</div><div class="line"> * <span class="doctag">@date</span> 2017年5月4日</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MulitClientServer</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="keyword">try</span>(ServerSocket server = <span class="keyword">new</span> ServerSocket(<span class="number">12345</span>)) &#123;</div><div class="line">			<span class="comment">//循环接受客户端请求</span></div><div class="line">			<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</div><div class="line">				Socket socket = server.accept();</div><div class="line">				handle(socket);</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span>(IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 处理客户请求</div><div class="line">	 * <span class="doctag">@param</span> socket</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(Socket socket)</span> </span>&#123;</div><div class="line">		<span class="comment">//开启一个线程,lambda表达式</span></div><div class="line">		<span class="keyword">new</span> Thread(() -&gt; &#123;</div><div class="line">			<span class="keyword">try</span>(BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</div><div class="line">					PrintWriter writer = <span class="keyword">new</span> PrintWriter(socket.getOutputStream(), <span class="keyword">true</span>)) &#123;</div><div class="line">				<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</div><div class="line">					String message =  in.readLine();</div><div class="line">					System.out.println(message);</div><div class="line">					writer.println(<span class="string">"Server received: "</span> + message);</div><div class="line">					<span class="keyword">if</span>(<span class="string">"bye"</span>.equals(message)) &#123;</div><div class="line">						<span class="keyword">break</span>;</div><div class="line">					&#125;</div><div class="line">				&#125;</div><div class="line">			&#125; <span class="keyword">catch</span>(IOException e) &#123;</div><div class="line">				e.printStackTrace();</div><div class="line">			&#125;</div><div class="line">		&#125;).start();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>我们可以看到，当服务器接受到一个客户单的请求之后，采用handle()方法去处理客户端的请求，这里使用了Java8中lambda表达式来替代匿名内部类的语法，来简化我们的编程，使我们的语法更加简洁。对于每一个客户端的请求都开启一个新的线程去处理，当然，如果还想做到更加优化，可以采用Executor线程池去处理，节省创建和关闭线程的开销。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/02/socket(1)/" rel="next" title="Java Socket 编程那些事（1）">
+                <i class="fa fa-chevron-left"></i> Java Socket 编程那些事（1）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -607,6 +462,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -626,8 +485,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://opd90imnd.bkt.clouddn.com/timg.jpg"
@@ -724,6 +592,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件的位置"><span class="nav-number">2.</span> <span class="nav-text">配置文件的位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#server-xml"><span class="nav-number">3.</span> <span class="nav-text">server.xml</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改端口"><span class="nav-number">3.1.</span> <span class="nav-text">修改端口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改虚拟目录"><span class="nav-number">3.2.</span> <span class="nav-text">修改虚拟目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tomcat-users"><span class="nav-number">4.</span> <span class="nav-text">tomcat-users</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -842,6 +726,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
