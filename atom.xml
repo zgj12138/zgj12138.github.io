@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zgj12138.github.io/blog/"/>
-  <updated>2017-06-30T13:21:36.579Z</updated>
+  <updated>2017-06-30T13:26:09.808Z</updated>
   <id>https://zgj12138.github.io/blog/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://zgj12138.github.io/blog/2017/06/30/Java%E7%94%9F%E4%BA%A7%E8%80%85%E6%B6%88%E8%B4%B9%E8%80%85%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BA%94%E7%A7%8D%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/"/>
     <id>https://zgj12138.github.io/blog/2017/06/30/Java生产者消费者模型的五种实现方式/</id>
     <published>2017-06-30T13:47:18.000Z</published>
-    <updated>2017-06-30T13:21:36.579Z</updated>
+    <updated>2017-06-30T13:26:09.808Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>生产者和消费者问题是线程模型中的经典问题：生产者和消费者在同一时间段内共用同一个存储空间，生产者往存储空间中添加产品，消费者从存储空间中取走产品，当存储空间为空时，消费者阻塞，当存储空间满时，生产者阻塞。<br><img src="https://ooo.0o0.ooo/2017/06/29/595523d4de338.png" alt="生产者消费者.png"><br><strong>现在用四种方式来实现生产者消费者模型</strong><br><a id="more"></a></p>
 <h2 id="wait-和notify-方法的实现"><a href="#wait-和notify-方法的实现" class="headerlink" title="wait()和notify()方法的实现"></a>wait()和notify()方法的实现</h2><p>这也是最简单最基础的实现，缓冲区满和为空时都调用wait()方法等待，当生产者生产了一个产品或者消费者消费了一个产品之后会唤醒所有线程。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 生产者和消费者，wait()和notify()的实现</div><div class="line"> * <span class="doctag">@author</span> ZGJ</div><div class="line"> * <span class="doctag">@date</span> 2017年6月22日</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test1</span> </span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Integer count = <span class="number">0</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Integer FULL = <span class="number">10</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String LOCK = <span class="string">"lock"</span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Test1 test1 = <span class="keyword">new</span> Test1();</div><div class="line">		<span class="keyword">new</span> Thread(test1.new Producer()).start();</div><div class="line">		<span class="keyword">new</span> Thread(test1.new Consumer()).start();</div><div class="line">		<span class="keyword">new</span> Thread(test1.new Producer()).start();</div><div class="line">		<span class="keyword">new</span> Thread(test1.new Consumer()).start();</div><div class="line">		<span class="keyword">new</span> Thread(test1.new Producer()).start();</div><div class="line">		<span class="keyword">new</span> Thread(test1.new Consumer()).start();</div><div class="line">		<span class="keyword">new</span> Thread(test1.new Producer()).start();</div><div class="line">		<span class="keyword">new</span> Thread(test1.new Consumer()).start();</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Producer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">				<span class="keyword">try</span> &#123;</div><div class="line">					Thread.sleep(<span class="number">3000</span>);</div><div class="line">				&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">					e.printStackTrace();</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">synchronized</span> (LOCK) &#123;</div><div class="line">					<span class="keyword">while</span> (count == FULL) &#123;</div><div class="line">						<span class="keyword">try</span> &#123;</div><div class="line">							LOCK.wait();</div><div class="line">						&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">							e.printStackTrace();</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">					count++;</div><div class="line">					System.out.println(Thread.currentThread().getName() + <span class="string">"生产者生产，目前总共有"</span> + count);</div><div class="line">					LOCK.notifyAll();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">Consumer</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">				<span class="keyword">try</span> &#123;</div><div class="line">					Thread.sleep(<span class="number">3000</span>);</div><div class="line">				&#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">					e.printStackTrace();</div><div class="line">				&#125;</div><div class="line">				<span class="keyword">synchronized</span> (LOCK) &#123;</div><div class="line">					<span class="keyword">while</span> (count == <span class="number">0</span>) &#123;</div><div class="line">						<span class="keyword">try</span> &#123;</div><div class="line">							LOCK.wait();</div><div class="line">						&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">						&#125;</div><div class="line">					&#125;</div><div class="line">					count--;</div><div class="line">					System.out.println(Thread.currentThread().getName() + <span class="string">"消费者消费，目前总共有"</span> + count);</div><div class="line">					LOCK.notifyAll();</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -36,7 +36,7 @@
 <tr>
 <th style="text-align:center">操作</th>
 <th style="text-align:center">抛异常</th>
-<th style="text-align:right">特定值</th>
+<th style="text-align:center">特定值</th>
 <th style="text-align:center">阻塞</th>
 <th style="text-align:center">超时</th>
 </tr>
@@ -45,21 +45,22 @@
 <tr>
 <td style="text-align:center">插入</td>
 <td style="text-align:center">add(o)</td>
-<td style="text-align:right">offer(o)</td>
+<td style="text-align:center">offer(o)</td>
 <td style="text-align:center">put(o)</td>
 <td style="text-align:center">offer(o, timeout, timeunit)</td>
 </tr>
 <tr>
 <td style="text-align:center">移除</td>
 <td style="text-align:center">remove(o)</td>
-<td style="text-align:right">poll(o)</td>
+<td style="text-align:center">poll(o)</td>
 <td style="text-align:center">take(o)</td>
 <td style="text-align:center">poll(timeout, timeunit)</td>
 </tr>
 <tr>
 <td style="text-align:center">检查</td>
 <td style="text-align:center">element(o)</td>
-<td style="text-align:right">peek(o)</td>
+<td style="text-align:center">peek(o)</td>
+<td style="text-align:center"></td>
 <td style="text-align:center"></td>
 </tr>
 </tbody>

@@ -100,7 +100,7 @@
 <meta property="og:site_name" content="Kevin_ZGJ">
 <meta property="og:description" content="前言生产者和消费者问题是线程模型中的经典问题：生产者和消费者在同一时间段内共用同一个存储空间，生产者往存储空间中添加产品，消费者从存储空间中取走产品，当存储空间为空时，消费者阻塞，当存储空间满时，生产者阻塞。现在用四种方式来实现生产者消费者模型">
 <meta property="og:image" content="https://ooo.0o0.ooo/2017/06/29/595523d4de338.png">
-<meta property="og:updated_time" content="2017-06-30T13:21:36.579Z">
+<meta property="og:updated_time" content="2017-06-30T13:26:09.808Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="生产者消费者的五种实现方式">
 <meta name="twitter:description" content="前言生产者和消费者问题是线程模型中的经典问题：生产者和消费者在同一时间段内共用同一个存储空间，生产者往存储空间中添加产品，消费者从存储空间中取走产品，当存储空间为空时，消费者阻塞，当存储空间满时，生产者阻塞。现在用四种方式来实现生产者消费者模型">
@@ -395,7 +395,7 @@
 <tr>
 <th style="text-align:center">操作</th>
 <th style="text-align:center">抛异常</th>
-<th style="text-align:right">特定值</th>
+<th style="text-align:center">特定值</th>
 <th style="text-align:center">阻塞</th>
 <th style="text-align:center">超时</th>
 </tr>
@@ -404,21 +404,22 @@
 <tr>
 <td style="text-align:center">插入</td>
 <td style="text-align:center">add(o)</td>
-<td style="text-align:right">offer(o)</td>
+<td style="text-align:center">offer(o)</td>
 <td style="text-align:center">put(o)</td>
 <td style="text-align:center">offer(o, timeout, timeunit)</td>
 </tr>
 <tr>
 <td style="text-align:center">移除</td>
 <td style="text-align:center">remove(o)</td>
-<td style="text-align:right">poll(o)</td>
+<td style="text-align:center">poll(o)</td>
 <td style="text-align:center">take(o)</td>
 <td style="text-align:center">poll(timeout, timeunit)</td>
 </tr>
 <tr>
 <td style="text-align:center">检查</td>
 <td style="text-align:center">element(o)</td>
-<td style="text-align:right">peek(o)</td>
+<td style="text-align:center">peek(o)</td>
+<td style="text-align:center"></td>
 <td style="text-align:center"></td>
 </tr>
 </tbody>
