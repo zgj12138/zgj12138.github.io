@@ -100,7 +100,7 @@
 <meta property="og:site_name" content="Kevin_ZGJ">
 <meta property="og:description" content="前言Redis 是我们目前大规模使用的缓存中间件，由于它强大高效而又便捷的功能，得到了广泛的使用。单节点的Redis已经就达到了很高的性能，为了提高可用性我们可以使用Redis集群。本文参考了Rdis的官方文档和使用Redis官方提供的Redis Cluster工具搭建Rdis集群。 注意 ：Redis的版本要在3.0以上,截止今天，Redis的版本是3.2.9，本教程也使用3.2.9作为教程">
 <meta property="og:image" content="https://ooo.0o0.ooo/2017/07/06/595dab1f2378b.jpg">
-<meta property="og:updated_time" content="2017-07-08T12:21:30.829Z">
+<meta property="og:updated_time" content="2017-07-08T12:26:19.713Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis集群的原理的搭建">
 <meta name="twitter:description" content="前言Redis 是我们目前大规模使用的缓存中间件，由于它强大高效而又便捷的功能，得到了广泛的使用。单节点的Redis已经就达到了很高的性能，为了提高可用性我们可以使用Redis集群。本文参考了Rdis的官方文档和使用Redis官方提供的Redis Cluster工具搭建Rdis集群。 注意 ：Redis的版本要在3.0以上,截止今天，Redis的版本是3.2.9，本教程也使用3.2.9作为教程">
@@ -420,20 +420,20 @@
 <p>主节点对命令的复制工作发生在返回命令回复之后， 因为如果每次处理命令请求都需要等待复制操作完成的话， 那么主节点处理命令请求的速度将极大地降低 —— 我们必须在性能和一致性之间做出权衡。 注意：Redis 集群可能会在将来提供同步写的方法。 Redis 集群另外一种可能会丢失命令的情况是集群出现了网络分区， 并且一个客户端与至少包括一个主节点在内的少数实例被孤立。<br>举个例子 假设集群包含 A 、 B 、 C 、 A1 、 B1 、 C1 六个节点， 其中 A 、B 、C 为主节点， A1 、B1 、C1 为A，B，C的从节点， 还有一个客户端 Z1 假设集群中发生网络分区，那么集群可能会分为两方，大部分的一方包含节点 A 、C 、A1 、B1 和 C1 ，小部分的一方则包含节点 B 和客户端 Z1 .<br>Z1仍然能够向主节点B中写入, 如果网络分区发生时间较短,那么集群将会继续正常运作,如果分区的时间足够让大部分的一方将B1选举为新的master，那么Z1写入B中得数据便丢失了.<br>注意， 在网络分裂出现期间， 客户端 Z1 可以向主节点 B 发送写命令的最大时间是有限制的， 这一时间限制称为节点超时时间（node timeout）， 是 Redis 集群的一个重要的配置选项</p>
 <h2 id="搭建Redis集群"><a href="#搭建Redis集群" class="headerlink" title="搭建Redis集群"></a>搭建Redis集群</h2><p>要让集群正常工作至少需要3个主节点，在这里我们要创建6个redis节点，其中三个为主节点，三个为从节点，对应的redis节点的ip和端口对应关系如下（为了简单演示都在同一台机器上面）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:7000</div><div class="line"></div><div class="line">127.0.0.1:7001</div><div class="line"></div><div class="line">127.0.0.1:7002</div><div class="line"></div><div class="line">127.0.0.1:7003</div><div class="line"></div><div class="line">127.0.0.1:7004</div><div class="line"></div><div class="line">127.0.0.1:7005</div></pre></td></tr></table></figure></p>
 <h3 id="安装和启动Redis"><a href="#安装和启动Redis" class="headerlink" title="安装和启动Redis"></a>安装和启动Redis</h3><ol>
-<li><p>下载安装包</p>
+<li>下载安装包</li>
+</ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://download.redis.io/releases/redis-3.2.9.tar.gz</div></pre></td></tr></table></figure>
-</li>
-<li><p>解压安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tar zxvf redis-3.2.9.tar.gz</div><div class="line">cd redis-3.2.9</div><div class="line">make &amp;&amp; make PREFIX=/usr/local/redis install</div></pre></td></tr></table></figure>
+<ol>
+<li>解压安装<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tar zxvf redis-3.2.9.tar.gz</div><div class="line">cd redis-3.2.9</div><div class="line">make &amp;&amp; make PREFIX=/usr/local/redis install</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>这里如果失败的自行yum安装gcc和tcl<br><figure class="highlight plain"><figcaption><span>install gcc```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">```yum install tcl</div></pre></td></tr></table></figure></p>
+<p>这里如果失败的自行yum安装gcc和tcl<br><code>yum install gcc</code> ,<code>yum install tcl</code></p>
 <ol>
 <li><p>创建目录</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/redis</div><div class="line">mkdir cluster</div><div class="line">cd cluster</div><div class="line">mkdir 7000 7001 7002 7003 7004 7005</div></pre></td></tr></table></figure>
 </li>
 <li><p>复制和修改配置文件<br>将redis目录下的配置文件复制到对应端口文件夹下,6个文件夹都要复制一份</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp redis-3.2.9/redis.conf /usr/local/redis/cluster/7000</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp redis-3.2.9/redis.conf /usr/local/redis/cluster/7000</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>修改配置文件<code>redis.conf</code>，将下面的选项修改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"># 端口号</div><div class="line">port 7000</div><div class="line"># 后台启动</div><div class="line">daemonize yes</div><div class="line"># 开启集群</div><div class="line">cluster-enabled yes</div><div class="line">#集群节点配置文件</div><div class="line">cluster-config-file nodes-7000.conf</div><div class="line"># 集群连接超时时间</div><div class="line">cluster-node-timeout 5000</div><div class="line"># 进程pid的文件位置</div><div class="line">pidfile /var/run/redis-7000.pid</div><div class="line"># 开启aof</div><div class="line">appendonly yes</div><div class="line"># aof文件路径</div><div class="line">appendfilename &quot;appendonly-7005.aof&quot;</div><div class="line"># rdb文件路径</div><div class="line">dbfilename dump-7000.rdb</div></pre></td></tr></table></figure></p>
