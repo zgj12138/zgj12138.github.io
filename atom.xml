@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zgj12138.github.io/blog/"/>
-  <updated>2017-07-08T12:35:17.545Z</updated>
+  <updated>2017-07-08T12:42:23.581Z</updated>
   <id>https://zgj12138.github.io/blog/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://zgj12138.github.io/blog/2017/07/08/Redis%E9%9B%86%E7%BE%A4/"/>
     <id>https://zgj12138.github.io/blog/2017/07/08/Redis集群/</id>
     <published>2017-07-08T12:00:21.000Z</published>
-    <updated>2017-07-08T12:35:17.545Z</updated>
+    <updated>2017-07-08T12:42:23.581Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Redis 是我们目前大规模使用的缓存中间件，由于它强大高效而又便捷的功能，得到了广泛的使用。单节点的Redis已经就达到了很高的性能，为了提高可用性我们可以使用Redis集群。本文参考了Rdis的官方文档和使用Redis官方提供的Redis Cluster工具搭建Rdis集群。</p>
 <p><strong>注意</strong> ：Redis的版本要在3.0以上,截止今天，Redis的版本是3.2.9，本教程也使用3.2.9作为教程<br><a id="more"></a></p>
@@ -37,8 +37,9 @@
 <ul>
 <li>节点 A 负责处理 0 号至 5500 号哈希槽。</li>
 <li>节点 B 负责处理 5501 号至 11000 号哈希槽。</li>
-<li>节点 C 负责处理 11001 号至 16384 号哈希槽。<br>这种将哈希槽分布到不同节点的做法使得用户可以很容易地向集群中添加或者删除节点。 比如说：<br>我现在想设置一个key,叫<code>my_name</code>:</li>
+<li>节点 C 负责处理 11001 号至 16384 号哈希槽。</li>
 </ul>
+<p>这种将哈希槽分布到不同节点的做法使得用户可以很容易地向集群中添加或者删除节点。 比如说：<br>我现在想设置一个key,叫<code>my_name</code>:</p>
 <p><code>set my_name zhangguoji</code></p>
 <p>按照Redis Cluster的哈希槽算法，<code>CRC16(&#39;my_name&#39;)%16384 = 2412</code> 那么这个key就被分配到了节点A上<br>同样的，当我连接(A,B,C)的任意一个节点想获取<code>my_name</code>这个key,都会转到节点A上<br>再比如<br>如果用户将新节点 D 添加到集群中， 那么集群只需要将节点 A 、B 、 C 中的某些槽移动到节点 D 就可以了。<br>增加一个D节点的结果可能如下：</p>
 <ul>
@@ -66,10 +67,9 @@
 </li>
 <li><p>解压安装</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tar zxvf redis-3.2.9.tar.gz</div><div class="line">cd redis-3.2.9</div><div class="line">make &amp;&amp; make PREFIX=/usr/local/redis install</div></pre></td></tr></table></figure>
+<p>这里如果失败的自行yum安装gcc和tcl</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install gcc</div><div class="line">yum install tcl</div></pre></td></tr></table></figure>
 </li>
-</ol>
-<p>这里如果失败的自行yum安装gcc和tcl<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum install gcc</div><div class="line">yum install tcl</div></pre></td></tr></table></figure></p>
-<ol>
 <li><p>创建目录</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd /usr/local/redis</div><div class="line">mkdir cluster</div><div class="line">cd cluster</div><div class="line">mkdir 7000 7001 7002 7003 7004 7005</div></pre></td></tr></table></figure>
 </li>
