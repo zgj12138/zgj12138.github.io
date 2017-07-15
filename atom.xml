@@ -282,7 +282,7 @@
     <link href="https://zgj12138.github.io/blog/2017/05/15/Tomcat%E9%85%8D%E7%BD%AE/"/>
     <id>https://zgj12138.github.io/blog/2017/05/15/Tomcat配置/</id>
     <published>2017-05-15T04:43:25.000Z</published>
-    <updated>2017-05-15T09:26:31.727Z</updated>
+    <updated>2017-07-14T14:19:01.288Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们都知道Tomcat服务器是我们在学习JavaWeb中最常使用的服务器，所以了解Tomcat的配置文件显得很重要，昨天去面试的时候，被面试官问了几个关于Tomcat配置文件的几个问题， 以前配过，但是后来都忘记了，现在来回顾一下Tomcat中比较常用得到的配置文件吧</p>
 <h2 id="配置文件的位置"><a href="#配置文件的位置" class="headerlink" title="配置文件的位置"></a>配置文件的位置</h2><p>Tomcat的配置文件在<code>conf</code>目录下，有<code>context.xml</code>、<code>server.xml</code>、<code>tomcat-users.xml</code>、<code>web.xml</code>这些配置文件</p>
@@ -308,7 +308,7 @@
       <category term="服务器" scheme="https://zgj12138.github.io/blog/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
     
     
-      <category term="Tomcat" scheme="https://zgj12138.github.io/blog/tags/Tomcat/"/>
+      <category term="tomcat" scheme="https://zgj12138.github.io/blog/tags/tomcat/"/>
     
   </entry>
   
