@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zgj12138.github.io/blog/"/>
-  <updated>2017-07-30T16:12:45.700Z</updated>
+  <updated>2017-07-30T16:14:51.981Z</updated>
   <id>https://zgj12138.github.io/blog/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://zgj12138.github.io/blog/2017/07/30/hadoop%E5%88%9D%E6%8E%A2/"/>
     <id>https://zgj12138.github.io/blog/2017/07/30/hadoop初探/</id>
     <published>2017-07-30T15:42:08.000Z</published>
-    <updated>2017-07-30T16:12:45.700Z</updated>
+    <updated>2017-07-30T16:14:51.981Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>近几年，大数据，云计算，机器学习成为了非常热门的话题，这些技术运用在了很多的领域，也是在未来很有发展前景的技术。自己最近在接触一些大数据的东西，学习大数据的话自然很有必要先学习Hadoop和Spark。这里我们就来一探Hadoop的究竟吧。<br><img src="https://i.loli.net/2017/07/29/597c475fd58d4.png" alt="hadoop-pic1.png"><br><a id="more"></a></p>
 <h2 id="Hadoop是什么"><a href="#Hadoop是什么" class="headerlink" title="Hadoop是什么"></a>Hadoop是什么</h2><p>Hadoop是一个由Apache基金会所开发的分布式系统基础架构。<br>用户可以在不了解分布式底层细节的情况下，开发分布式程序。充分利用集群的威力进行高速运算和存储。<br>Hadoop实现了一个分布式文件系统（Hadoop Distributed File System），简称HDFS。HDFS有高容错性的特点，并且设计用来部署在低廉的（low-cost）硬件上；而且它提供高吞吐量（high throughput）来访问应用程序的数据，适合那些有着超大数据集（large data set）的应用程序。HDFS放宽了（relax）POSIX的要求，可以以流的形式访问（streaming access）文件系统中的数据。<br>核心设计：</p>
@@ -87,7 +87,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">	&lt;!-- 指定mr运行在yarn上 --&gt;</div><div class="line">	&lt;property&gt;</div><div class="line">		&lt;name&gt;mapreduce.framework.name&lt;/name&gt;</div><div class="line">		&lt;value&gt;yarn&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>yarn-site.xml</code><br>配置如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line"></div><div class="line">&lt;!-- Site specific YARN configuration properties --&gt;</div><div class="line">	&lt;!-- 指定YARN的老大（ResourceManager）的地址 --&gt;</div><div class="line">	&lt;property&gt;</div><div class="line">		&lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</div><div class="line">		&lt;value&gt;hadoop1&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">	&lt;!-- reducer获取数据的方式 --&gt;</div><div class="line">    &lt;property&gt;</div><div class="line">		&lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</div><div class="line">		&lt;value&gt;mapreduce_shuffle&lt;/value&gt;</div><div class="line">     &lt;/property&gt;</div><div class="line"></div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">&lt;!-- Site specific YARN configuration properties --&gt;</div><div class="line">	&lt;!-- 指定YARN的老大（ResourceManager）的地址 --&gt;</div><div class="line">	&lt;property&gt;</div><div class="line">		&lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</div><div class="line">		&lt;value&gt;hadoop1&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">	&lt;!-- reducer获取数据的方式 --&gt;</div><div class="line">    &lt;property&gt;</div><div class="line">		&lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</div><div class="line">		&lt;value&gt;mapreduce_shuffle&lt;/value&gt;</div><div class="line">     &lt;/property&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>5个文件都修改完成后，我们需要将hadoop添加到环境中<br><code>vim /etc/proflie</code><br>加上HADOOP_HOME, 修改文件内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">export JAVA_HOME=/home/hadoop/app/jdk1.8.0_131</div><div class="line">export PATH=$PATH:$JAVA_HOME/bin</div><div class="line">export HADOOP_HOME=/home/hadoop/app/hadoop-2.7.3</div><div class="line">export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</div></pre></td></tr></table></figure></p>
