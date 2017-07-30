@@ -104,7 +104,7 @@
 <meta property="og:image" content="https://i.loli.net/2017/07/29/597c53e72ab12.jpg">
 <meta property="og:image" content="https://i.loli.net/2017/07/29/597caedef3048.png">
 <meta property="og:image" content="https://i.loli.net/2017/07/30/597dedda81c30.png">
-<meta property="og:updated_time" content="2017-07-30T16:10:15.242Z">
+<meta property="og:updated_time" content="2017-07-30T16:11:52.341Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hadoop初探">
 <meta name="twitter:description" content="前言近几年，大数据，云计算，机器学习成为了非常热门的话题，这些技术运用在了很多的领域，也是在未来很有发展前景的技术。自己最近在接触一些大数据的东西，学习大数据的话自然很有必要先学习Hadoop和Spark。这里我们就来一探Hadoop的究竟吧。">
@@ -478,7 +478,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source /etc/profile</div></pre></td></tr></table></figure>
 <h4 id="配置Hadoop"><a href="#配置Hadoop" class="headerlink" title="配置Hadoop"></a>配置Hadoop</h4><p>注意：hadoop2.x的配置文件$HADOOP_HOME/etc/hadoop,这里我们的目录就是在/home/hadoop/app/hadoop-2.7.3/etc/下<br>伪分布式需要修改5个配置文件</p>
 <ol>
-<li><code>hadoop-env.sh</code><br>这个文件表示hadoop运行环境的文件，找到25行，改成<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export JAVA_HOME=/home/hadoop/app/jdk1.8.0_131</div><div class="line">`</div></pre></td></tr></table></figure>
+<li><code>hadoop-env.sh</code><br>这个文件表示hadoop运行环境的文件，找到25行，改成<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export JAVA_HOME=/home/hadoop/app/jdk1.8.0_131</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>这个值原来是${JAVA_HOME}，但是有点问题，老是获取不到正确的值，所以这里我们就直接将它写死</p>
@@ -489,7 +489,7 @@
 <li><p><code>hdfs-site.xml</code><br>配置如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">	&lt;!-- 指定HDFS副本的数量 --&gt;</div><div class="line">	&lt;property&gt;</div><div class="line">		&lt;name&gt;dfs.replication&lt;/name&gt;</div><div class="line">		&lt;value&gt;1&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
 </li>
-<li><p><code>mapred-site.xml</code><br>这里先执行一个命令<code>mv mapred-site.xml.template mapred-site.xml</code><br>然后再修改<code>vim mapred-site.xml</code><br>配置如下：</p>
+<li><p><code>mapred-site.xml</code><br>这里先执行一个命令，重命名模板文件<code>mv mapred-site.xml.template mapred-site.xml</code><br>然后再修改<code>vim mapred-site.xml</code><br>配置如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;configuration&gt;</div><div class="line">	&lt;!-- 指定mr运行在yarn上 --&gt;</div><div class="line">	&lt;property&gt;</div><div class="line">		&lt;name&gt;mapreduce.framework.name&lt;/name&gt;</div><div class="line">		&lt;value&gt;yarn&lt;/value&gt;</div><div class="line">    &lt;/property&gt;</div><div class="line">&lt;/configuration&gt;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>yarn-site.xml</code><br>配置如下：</p>
