@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="threadlocal," />
 
 
 
@@ -92,15 +92,17 @@
 
 
 
-<meta name="description" content="岂能尽如人意，但求不愧我心">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Kevin_ZGJ">
-<meta property="og:url" content="https://zgj12138.github.io/blog/tags/socket/index.html">
+<meta name="description" content="前言在各大公司招聘笔试和面试题题中，都遇到了很多ThreadLocal的问题，最近博主在面试的时候也被两次问到过这个问题，之前也在网上看到过一些此类的文章，其中有很多文章将ThreadLocal与线程同步机制混为一谈，特别注意的是ThreadLocal与线程同步无关，并不是为了解决多线程共享变量问题，我们今天就来研究一下ThreadLocal的原理">
+<meta name="keywords" content="threadlocal">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ThreadLocal解析">
+<meta property="og:url" content="https://zgj12138.github.io/blog/2017/05/15/ThreadLocal解析/index.html">
 <meta property="og:site_name" content="Kevin_ZGJ">
-<meta property="og:description" content="岂能尽如人意，但求不愧我心">
+<meta property="og:description" content="前言在各大公司招聘笔试和面试题题中，都遇到了很多ThreadLocal的问题，最近博主在面试的时候也被两次问到过这个问题，之前也在网上看到过一些此类的文章，其中有很多文章将ThreadLocal与线程同步机制混为一谈，特别注意的是ThreadLocal与线程同步无关，并不是为了解决多线程共享变量问题，我们今天就来研究一下ThreadLocal的原理">
+<meta property="og:updated_time" content="2017-08-19T12:26:23.769Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kevin_ZGJ">
-<meta name="twitter:description" content="岂能尽如人意，但求不愧我心">
+<meta name="twitter:title" content="ThreadLocal解析">
+<meta name="twitter:description" content="前言在各大公司招聘笔试和面试题题中，都遇到了很多ThreadLocal的问题，最近博主在面试的时候也被两次问到过这个问题，之前也在网上看到过一些此类的文章，其中有很多文章将ThreadLocal与线程同步机制混为一谈，特别注意的是ThreadLocal与线程同步无关，并不是为了解决多线程共享变量问题，我们今天就来研究一下ThreadLocal的原理">
 
 
 
@@ -128,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="https://zgj12138.github.io/blog/tags/socket/"/>
+  <link rel="canonical" href="https://zgj12138.github.io/blog/2017/05/15/ThreadLocal解析/"/>
 
 
 
 
 
-  <title>标签: socket | Kevin_ZGJ</title>
+  <title>ThreadLocal解析 | Kevin_ZGJ</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -168,7 +170,7 @@
     
   
 
-  <div class="container sidebar-position-left  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -306,46 +308,228 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        socket
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://zgj12138.github.io/blog/2017/05/15/ThreadLocal解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZGJ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://opd90imnd.bkt.clouddn.com/timg.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Kevin_ZGJ">
+    </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ThreadLocal解析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-15T12:43:25+08:00">
+                2017-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/多线程/" itemprop="url" rel="index">
+                    <span itemprop="name">多线程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/05/15/ThreadLocal解析/" class="leancloud_visitors" data-flag-title="ThreadLocal解析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在各大公司招聘笔试和面试题题中，都遇到了很多ThreadLocal的问题，最近博主在面试的时候也被两次问到过这个问题，之前也在网上看到过一些此类的文章，其中有很多文章将ThreadLocal与线程同步机制混为一谈，特别注意的是ThreadLocal与线程同步无关，并不是为了解决多线程共享变量问题，我们今天就来研究一下ThreadLocal的原理<br><a id="more"></a></p>
+<h1 id="ThreadLocal是什么"><a href="#ThreadLocal是什么" class="headerlink" title="ThreadLocal是什么"></a>ThreadLocal是什么</h1><p>我们首先来看一下JDK中的源码是怎么写的</p>
+<blockquote>
+<p>This class provides thread-local variables. These variables differ from their normal counterparts in that each thread that accesses one (via its {@code get} or {@code set} method) has its own, independently initialized copy of the variable. {@code ThreadLocal} instances are typically private static fields in classes that wish to associate state with a thread (e.g., a user ID or Transaction ID</p>
+</blockquote>
+<p>翻译过来就是：</p>
+<blockquote>
+<p>ThreadLocal类用来提供线程内部的局部变量。这种变量在多线程环境下访问(通过get或set方法访问)时能保证各个线程里的变量相对独立于其他线程内的变量。ThreadLocal实例通常来说都是private static类型的，用于关联线程和线程的上下文。</p>
+</blockquote>
+<p>总结来说就是：<strong>ThreadLocal的作用是提供线程内的局部变量，这种变量在线程的生命周期内起作用，减少同一个线程内多个函数或者组件之间一些公共变量的传递的复杂度。</strong><br>ThreadLocal不是为了解决多线程访问共享变量，而是为每个线程创建一个单独的变量副本，提供了保持对象的方法和避免参数传递的复杂性。</p>
+<p>ThreadLocal的主要应用场景为按线程多实例（每个线程对应一个实例）的对象的访问，并且这个对象很多地方都要用到。例如：同一个网站登录用户，每个用户服务器会为其开一个线程，每个线程中创建一个ThreadLocal，里面存用户基本信息等，在很多页面跳转时，会显示用户信息或者得到用户的一些信息等频繁操作，这样多线程之间并没有联系而且当前线程也可以及时获取想要的数据。</p>
+<h1 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h1><p>ThreadLocal可以看做是一个容器，容器里面存放着属于当前线程的变量。ThreadLocal类提供了四个对外开放的接口方法，这也是用户操作ThreadLocal类的基本方法：</p>
+<ul>
+<li><p><code>public void set(Object value)</code>设置当前线程的线程局部变量的值。 </p>
+</li>
+<li><p><code>public Object get()</code>该方法返回当前线程所对应的线程局部变量。 </p>
+</li>
+<li><p><code>public void remove()</code>将当前线程局部变量的值删除，目的是为了减少内存的占用，该方法是JDK 5.0新增的方法。需要指出的是，当线程结束后，对应该线程的局部变量将自动被垃圾回收，所以显式调用该方法清除线程的局部变量并不是必须的操作，但它可以加快内存回收的速度。 </p>
+</li>
+<li><code>protected Object initialValue()</code>返回该线程局部变量的初始值，该方法是一个protected的方法，显然是为了让子类覆盖而设计的。这个方法是一个延迟调用方法，在线程第1次调用get()或set(Object)时才执行，并且仅执行1次，ThreadLocal中的缺省实现直接返回一个null。</li>
+</ul>
+<p>可以通过上述的几个方法实现ThreadLocal中变量的访问，数据设置，初始化以及删除局部变量，那ThreadLocal内部是如何为每一个线程维护变量副本的呢？</p>
+<p>其实在ThreadLocal类中有一个静态内部类ThreadLocalMap(其类似于Map)，用键值对的形式存储每一个线程的变量副本，ThreadLocalMap中元素的key为当前ThreadLocal对象，而value对应线程的变量副本，每个线程可能存在多个ThreadLocal。</p>
+<h1 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h1><h2 id="get-方法"><a href="#get-方法" class="headerlink" title="get()方法"></a>get()方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</div><div class="line">    Thread t = Thread.currentThread();<span class="comment">//当前线程</span></div><div class="line">    ThreadLocalMap map = getMap(t);<span class="comment">//获取当前线程对应的ThreadLocalMap</span></div><div class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>) &#123;</div><div class="line">        ThreadLocalMap.Entry e = map.getEntry(<span class="keyword">this</span>);<span class="comment">//获取对应ThreadLocal的变量值</span></div><div class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</div><div class="line">            T result = (T)e.value;</div><div class="line">            <span class="keyword">return</span> result;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> setInitialValue();<span class="comment">//若当前线程还未创建ThreadLocalMap，则返回调用此方法并在其中调用createMap方法进行创建并返回初始值。</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="set-方法"><a href="#set-方法" class="headerlink" title="set()方法"></a>set()方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//设置变量的值</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T value)</span> </span>&#123;</div><div class="line">   Thread t = Thread.currentThread();</div><div class="line">   ThreadLocalMap map = getMap(t);</div><div class="line">   <span class="keyword">if</span> (map != <span class="keyword">null</span>)</div><div class="line">       map.set(<span class="keyword">this</span>, value);</div><div class="line">   <span class="keyword">else</span></div><div class="line">       createMap(t, value);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="setInitialValue-方法"><a href="#setInitialValue-方法" class="headerlink" title="setInitialValue()方法"></a>setInitialValue()方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> T <span class="title">setInitialValue</span><span class="params">()</span> </span>&#123;</div><div class="line">   T value = initialValue();</div><div class="line">   Thread t = Thread.currentThread();</div><div class="line">   ThreadLocalMap map = getMap(t);</div><div class="line">   <span class="keyword">if</span> (map != <span class="keyword">null</span>)</div><div class="line">       map.set(<span class="keyword">this</span>, value);</div><div class="line">   <span class="keyword">else</span></div><div class="line">       createMap(t, value);</div><div class="line">   <span class="keyword">return</span> value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="createMap-方法"><a href="#createMap-方法" class="headerlink" title="createMap()方法"></a>createMap()方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">为当前线程创建一个ThreadLocalMap的threadlocals,并将第一个值存入到当前map中</div><div class="line"><span class="doctag">@param</span> t the current thread</div><div class="line"><span class="doctag">@param</span> firstValue value for the initial entry of the map</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">createMap</span><span class="params">(Thread t, T firstValue)</span> </span>&#123;</div><div class="line">    t.threadLocals = <span class="keyword">new</span> ThreadLocalMap(<span class="keyword">this</span>, firstValue);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="remove-方法"><a href="#remove-方法" class="headerlink" title="remove()方法"></a>remove()方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//删除当前线程中ThreadLocalMap对应的ThreadLocal</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</div><div class="line">       ThreadLocalMap m = getMap(Thread.currentThread());</div><div class="line">       <span class="keyword">if</span> (m != <span class="keyword">null</span>)</div><div class="line">           m.remove(<span class="keyword">this</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="ThreadLocalMap"><a href="#ThreadLocalMap" class="headerlink" title="ThreadLocalMap"></a>ThreadLocalMap</h1><p>ThreadLocalMap是定制的hashMap，仅用于维护当前线程的本地变量值。仅ThreadLocal类对其有操作权限，是Thread的私有属性。为避免占用空间较大或生命周期较长的数据常驻于内存引发一系列问题，hash table的key是弱引用WeakReferences。当空间不足时，会清理未被引用的entry。</p>
+<p>getMap(t)返回当前线程的成员变量ThreadLocalMap（Thread的成员变量有ThreadLocalMap，这一点可以查看Thread的源码，如下）很明确的说明了ThreadLocal属于线程，ThreadLocalMap由ThreadLocal持有，说到底，ThreadLocalMap 也是线程所持有。每个线程Thread都有自己的ThreadLocalMap。<br>下面看一下该类的源代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span> </span>&#123;</div><div class="line">  <span class="comment">//map中的每个节点Entry,其键key是ThreadLocal并且还是弱引用，这也导致了后续会产生内存泄漏问题的原因。</span></div><div class="line"> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">ThreadLocal</span>&lt;?&gt;&gt; </span>&#123;</div><div class="line">           Object value;</div><div class="line">           Entry(ThreadLocal&lt;?&gt; k, Object v) &#123;</div><div class="line">               <span class="keyword">super</span>(k);</div><div class="line">               value = v;</div><div class="line">   &#125;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 初始化容量为16，以为对其扩充也必须是2的指数 </div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INITIAL_CAPACITY = <span class="number">16</span>;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 真正用于存储线程的每个ThreadLocal的数组，将ThreadLocal和其对应的值包装为一个Entry。</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> Entry[] table;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">///....其他的方法和操作都和map的类似</span></div></pre></td></tr></table></figure></p>
+<h1 id="注意问题"><a href="#注意问题" class="headerlink" title="注意问题"></a>注意问题</h1><ol>
+<li>ThreadLocal并未解决多线程访问共享对象的问题；</li>
+<li>ThreadLocal并不是每个线程拷贝一个对象，而是直接new（新建）一个；</li>
+<li>如果ThreadLocal.set()的对象是多线程共享的，那么还是涉及并发问题。</li>
+</ol>
+<h1 id="ThreadLocal的内存泄漏"><a href="#ThreadLocal的内存泄漏" class="headerlink" title="ThreadLocal的内存泄漏"></a>ThreadLocal的内存泄漏</h1><p>在上面提到过，每个thread中都存在一个map, map的类型是ThreadLocal.ThreadLocalMap. Map中的key为一个threadlocal实例. 这个Map的确使用了弱引用,不过弱引用只是针对key. 每个key都弱引用指向threadlocal. 当把threadlocal实例置为null以后,没有任何强引用指向threadlocal实例,所以threadlocal将会被gc回收. 但是,我们的value却不能回收,因为存在一条从current thread连接过来的强引用. 只有当前thread结束以后, current thread就不会存在栈中,强引用断开, Current Thread, Map, value将全部被GC回收。</p>
+<p>所以得出一个结论就是只要这个线程对象被gc回收，就不会出现内存泄露，但在threadLocal设为null和线程结束这段时间不会被回收的，就发生了我们认为的内存泄露。其实这是一个对概念理解的不一致，也没什么好争论的。最要命的是线程对象不被回收的情况，这就发生了真正意义上的内存泄露。比如使用线程池的时候，线程结束是不会销毁的，会再次使用的。就可能出现内存泄露。</p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2017/05/02/Java Socket 编程那些事(1)/" itemprop="url">
-              
-                <span itemprop="name">Java Socket 编程那些事（1）</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-02T23:47:44+08:00"
-              content="2017-05-02" >
-          05-02
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/threadlocal/" rel="tag"># threadlocal</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/02/Java Socket 编程那些事(1)/" rel="next" title="Java Socket 编程那些事（1）">
+                <i class="fa fa-chevron-left"></i> Java Socket 编程那些事（1）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/15/Tomcat配置/" rel="prev" title="Tomcat配置">
+                Tomcat配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -353,6 +537,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTgxMy82Mzc5"></div>
+    
+  </div>
+
 
         </div>
         
@@ -372,8 +562,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://opd90imnd.bkt.clouddn.com/timg.jpg"
@@ -470,6 +669,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ThreadLocal是什么"><span class="nav-number">2.</span> <span class="nav-text">ThreadLocal是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现原理"><span class="nav-number">3.</span> <span class="nav-text">实现原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源代码"><span class="nav-number">4.</span> <span class="nav-text">源代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#get-方法"><span class="nav-number">4.1.</span> <span class="nav-text">get()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set-方法"><span class="nav-number">4.2.</span> <span class="nav-text">set()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setInitialValue-方法"><span class="nav-number">4.3.</span> <span class="nav-text">setInitialValue()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#createMap-方法"><span class="nav-number">4.4.</span> <span class="nav-text">createMap()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#remove-方法"><span class="nav-number">4.5.</span> <span class="nav-text">remove()方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ThreadLocalMap"><span class="nav-number">5.</span> <span class="nav-text">ThreadLocalMap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意问题"><span class="nav-number">6.</span> <span class="nav-text">注意问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ThreadLocal的内存泄漏"><span class="nav-number">7.</span> <span class="nav-text">ThreadLocal的内存泄漏</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -608,6 +823,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
@@ -642,6 +861,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 
