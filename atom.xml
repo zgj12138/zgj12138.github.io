@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zgj12138.github.io/blog/"/>
-  <updated>2017-09-10T01:42:27.664Z</updated>
+  <updated>2017-09-10T01:44:55.466Z</updated>
   <id>https://zgj12138.github.io/blog/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://zgj12138.github.io/blog/2017/09/10/Java%20Socket%20%E7%BC%96%E7%A8%8B%E9%82%A3%E4%BA%9B%E4%BA%8B(2)/"/>
     <id>https://zgj12138.github.io/blog/2017/09/10/Java Socket 编程那些事(2)/</id>
     <published>2017-09-10T00:46:12.000Z</published>
-    <updated>2017-09-10T01:42:27.664Z</updated>
+    <updated>2017-09-10T01:44:55.466Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在上一篇博客中，我们使用了BIO,也就是阻塞式IO实现了Socket通信。<br><a href="http://blog.zgj12138.cn/2017/05/02/Java%20Socket%20%E7%BC%96%E7%A8%8B%E9%82%A3%E4%BA%9B%E4%BA%8B(1" target="_blank" rel="external">Java Socket编程那些事（1）</a>/)<br>现在我们使用jdk1.4之后的NIO来实现，NIO(new io / no-blocking io)。就如名字而言，NIO是一种同步非阻塞IO设计模式，</p>
 <h1 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h1><p>服务端打开一个通道（ServerSocketChannel），并向通道中注册一个选择器（Selector），这个选择器是与一些感兴趣的操作的标识（SelectionKey，即通过这个标识可以定位到具体的操作，从而进行响应的处理）相关联的，然后基于选择器（Selector）轮询通道（ServerSocketChannel）上注册的事件，并进行相应的处理。<br>客户端在请求与服务端通信时，也可以向服务器端一样注册（比服务端少了一个SelectionKey.OP_ACCEPT操作集合），并通过轮询来处理指定的事件，而不必阻塞。</p>
@@ -63,6 +63,8 @@
       &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;在上一篇博客中，我们使用了BIO,也就是阻塞式IO实现了Socket通信。&lt;br&gt;&lt;a href=&quot;http://blog.zgj12138
     
     </summary>
+    
+      <category term="Java" scheme="https://zgj12138.github.io/blog/categories/Java/"/>
     
     
       <category term="io" scheme="https://zgj12138.github.io/blog/tags/io/"/>
