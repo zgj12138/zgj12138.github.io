@@ -98,7 +98,7 @@
 <meta property="og:url" content="https://zgj12138.github.io/blog/2017/10/05/学习总结2017-10/index.html">
 <meta property="og:site_name" content="Kevin_ZGJ">
 <meta property="og:description" content="前言记录个人在10月的记录总结">
-<meta property="og:updated_time" content="2017-10-30T15:03:47.590Z">
+<meta property="og:updated_time" content="2017-10-31T15:17:36.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学习总结 2017-10">
 <meta name="twitter:description" content="前言记录个人在10月的记录总结">
@@ -746,6 +746,167 @@
 <li>最终一致性 </li>
 <li>使用另外开辟空间的思路，来解决并发冲突</li>
 </ol>
+<h1 id="2017-10-31"><a href="#2017-10-31" class="headerlink" title="2017-10-31"></a>2017-10-31</h1><h2 id="Hibernate-Validator"><a href="#Hibernate-Validator" class="headerlink" title="Hibernate Validator"></a>Hibernate Validator</h2><p>Hibernate Validator 是 Bean Validation 的参考实现 。Hibernate Validator 提供了 JSR 303 规范中所有内置 constraint 的实现，除此之外还有一些附加的 constraint。<br>在日常开发中，Hibernate Validator经常用来验证bean的字段，基于注解，方便快捷高效。</p>
+<h3 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h3><ol>
+<li>Bean Validation 中内置的 constraint</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">注解</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">@Valid</td>
+<td style="text-align:left">被注释的元素是一个对象，需要检查此对象的所有字段值</td>
+</tr>
+<tr>
+<td style="text-align:left">@Null</td>
+<td style="text-align:left">被注释的元素必须为 null</td>
+</tr>
+<tr>
+<td style="text-align:left">@NotNull</td>
+<td style="text-align:left">被注释的元素必须不为 null</td>
+</tr>
+<tr>
+<td style="text-align:left">@AssertTrue</td>
+<td style="text-align:left">被注释的元素必须为 true</td>
+</tr>
+<tr>
+<td style="text-align:left">@AssertFalse</td>
+<td style="text-align:left">被注释的元素必须为 false</td>
+</tr>
+<tr>
+<td style="text-align:left">@Min(value)</td>
+<td style="text-align:left">被注释的元素必须是一个数字，其值必须大于等于指定的最小值</td>
+</tr>
+<tr>
+<td style="text-align:left">@Max(value)</td>
+<td style="text-align:left">被注释的元素必须是一个数字，其值必须小于等于指定的最大值</td>
+</tr>
+<tr>
+<td style="text-align:left">@DecimalMin(value)</td>
+<td style="text-align:left">被注释的元素必须是一个数字，其值必须大于等于指定的最小值</td>
+</tr>
+<tr>
+<td style="text-align:left">@DecimalMax(value)</td>
+<td style="text-align:left">被注释的元素必须是一个数字，其值必须小于等于指定的最大值</td>
+</tr>
+<tr>
+<td style="text-align:left">@Size(max, min)</td>
+<td style="text-align:left">被注释的元素的大小必须在指定的范围内</td>
+</tr>
+<tr>
+<td style="text-align:left">@Digits (integer, fraction)</td>
+<td style="text-align:left">被注释的元素必须是一个数字，其值必须在可接受的范围内</td>
+</tr>
+<tr>
+<td style="text-align:left">@Past</td>
+<td style="text-align:left">被注释的元素必须是一个过去的日期</td>
+</tr>
+<tr>
+<td style="text-align:left">@Future</td>
+<td style="text-align:left">被注释的元素必须是一个将来的日期</td>
+</tr>
+<tr>
+<td style="text-align:left">@Pattern(value)</td>
+<td style="text-align:left">被注释的元素必须符合指定的正则表达式</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>Hibernate Validator 附加的 constraint</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">注解</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">@Email</td>
+<td style="text-align:left">被注释的元素必须是电子邮箱地址</td>
+</tr>
+<tr>
+<td style="text-align:left">@Length(min=, max=)</td>
+<td style="text-align:left">被注释的字符串的大小必须在指定的范围内</td>
+</tr>
+<tr>
+<td style="text-align:left">@NotEmpty</td>
+<td style="text-align:left">被注释的字符串的必须非空</td>
+</tr>
+<tr>
+<td style="text-align:left">@Range(min=, max=)</td>
+<td style="text-align:left">被注释的元素必须在合适的范围内</td>
+</tr>
+<tr>
+<td style="text-align:left">@NotBlank</td>
+<td style="text-align:left">被注释的字符串的必须非空</td>
+</tr>
+<tr>
+<td style="text-align:left">@URL(protocol=,host=,    port=, regexp=, flags=)</td>
+<td style="text-align:left">被注释的字符串必须是一个有效的url</td>
+</tr>
+<tr>
+<td style="text-align:left">@CreditCardNumber</td>
+<td style="text-align:left">被注释的字符串必须通过Luhn校验算法，银行卡，信用卡等号码一般都用Luhn计算合法性</td>
+</tr>
+<tr>
+<td style="text-align:left">@ScriptAssert(lang=, script=, alias=)</td>
+<td style="text-align:left">要有Java Scripting API 即JSR 223 (“Scripting for the JavaTM Platform”)的实现</td>
+</tr>
+<tr>
+<td style="text-align:left">@SafeHtml(whitelistType=, additionalTags=)</td>
+<td style="text-align:left">classpath中要有jsoup包</td>
+</tr>
+</tbody>
+</table>
+<p>hibernate补充的注解中，最后3个不常用，可忽略。<br>主要区分下@NotNull  @NotEmpty  @NotBlank 3个注解的区别：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">注解</th>
+<th style="text-align:left">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">@NotNull</td>
+<td style="text-align:left">任何对象的value不能为null</td>
+</tr>
+<tr>
+<td style="text-align:left">@NotEmpty</td>
+<td style="text-align:left">集合对象的元素不为0，即集合不为空，也可以用于字符串不为null</td>
+</tr>
+<tr>
+<td style="text-align:left">@NotBlank</td>
+<td style="text-align:left">只能用于字符串不为null，并且字符串trim()以后length要大于0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h3><ol>
+<li>JavaBean 中加上注解</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;  </div><div class="line">      </div><div class="line">    <span class="meta">@NotBlank</span>  </div><div class="line">    <span class="keyword">private</span> String name;  </div><div class="line">      </div><div class="line">    <span class="comment">//年龄要大于18岁  </span></div><div class="line">    <span class="meta">@Min</span>(<span class="number">18</span>)  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;  </div><div class="line">  </div><div class="line">    <span class="meta">@Email</span>  </div><div class="line">    <span class="keyword">private</span> String email;  </div><div class="line">      </div><div class="line">    <span class="comment">//嵌套验证  </span></div><div class="line">    <span class="meta">@Valid</span>  </div><div class="line">    <span class="keyword">private</span> Product products;  </div><div class="line">      </div><div class="line">    ... <span class="comment">//省略getter，setter  </span></div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span>&#123;  </div><div class="line">      </div><div class="line">    <span class="meta">@NotBlank</span>  </div><div class="line">    <span class="keyword">private</span> String name;  </div><div class="line">      </div><div class="line">    <span class="comment">//价格在10元-50元之间  </span></div><div class="line">    <span class="meta">@Range</span>(min=<span class="number">10</span>,max=<span class="number">50</span>)  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> price;  </div><div class="line">      </div><div class="line">    ... <span class="comment">//省略getter，setter  </span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>验证某一对象<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">validateModel</span><span class="params">(Object obj)</span> </span>&#123;<span class="comment">//验证某一个对象  </span></div><div class="line">      </div><div class="line">    StringBuffer buffer = <span class="keyword">new</span> StringBuffer(<span class="number">64</span>);<span class="comment">//用于存储验证后的错误信息  </span></div><div class="line">      </div><div class="line">    Validator validator = Validation.buildDefaultValidatorFactory()  </div><div class="line">            .getValidator();  </div><div class="line">  </div><div class="line">    Set&lt;ConstraintViolation&lt;Object&gt;&gt; constraintViolations = validator  </div><div class="line">            .validate(obj);<span class="comment">//验证某个对象,，其实也可以只验证其中的某一个属性的  </span></div><div class="line">  </div><div class="line">    Iterator&lt;ConstraintViolation&lt;Object&gt;&gt; iter = constraintViolations  </div><div class="line">            .iterator();  </div><div class="line">    <span class="keyword">while</span> (iter.hasNext()) &#123;  </div><div class="line">        String message = iter.next().getMessage();  </div><div class="line">        buffer.append(message);  </div><div class="line">    &#125;  </div><div class="line">    <span class="keyword">return</span> buffer.toString();  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>整合Spring MVC</p>
+<ol>
+<li><p>验证单个简单参数<br>在Controller上加上@Validated注解，方法上加上如下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 查询优惠券信息</div><div class="line"> * <span class="doctag">@param</span> keywords 关键字</div><div class="line"> * <span class="doctag">@param</span> publishStatus 发布状态</div><div class="line"> * <span class="doctag">@return</span></div><div class="line"> */</div><div class="line"><span class="meta">@Pagination</span></div><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/list"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Result <span class="title">listCoupon</span><span class="params">(String keywords, @Min(value=<span class="number">1</span>, message=<span class="string">"publishStatus not null"</span>)</span> Integer publishStatus) </span>&#123;</div><div class="line">    MapResult result = <span class="keyword">new</span> MapResult();</div><div class="line">    result.getInfo().put(<span class="string">"keywords"</span>, keywords);</div><div class="line">    result.getInfo().put(<span class="string">"publishStatus"</span>, publishStatus);</div><div class="line">    Page&lt;CouponVo&gt; page = couponService.pageCoupon(publishStatus, keywords);</div><div class="line">    result.getInfo().put(<span class="string">"page"</span>, page);</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>验证POJO参数, 在POJO里面加入验证注解，再在方法参数上加上@Validated注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/add"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> Result <span class="title">addUser</span><span class="params">(@Validated User user)</span> </span>&#123;</div><div class="line">    userService.add(user);</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="ForkJoin"><a href="#ForkJoin" class="headerlink" title="ForkJoin"></a>ForkJoin</h2><p>Fork<br>Fork就是一个不断分枝的过程，在当前任务的基础上长出n多个子任务。</p>
+<p>Join<br>Join是一个不断等待，获取任务执行结果的过程。</p>
+<p>联想-归并排序的思想</p>
+<p>下面演示了一段代码，该代码实现了从1-n的求和，采用了fork-join的思想，将大的任务拆分成小的子任务，再将这些子任务合并：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> java8;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.concurrent.ForkJoinPool;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.ForkJoinTask;</div><div class="line"><span class="keyword">import</span> java.util.concurrent.RecursiveTask;</div><div class="line"><span class="keyword">import</span> java.util.stream.LongStream;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * java7 forkJoinPool</div><div class="line"> * 任务拆分，工作窃取</div><div class="line"> * <span class="doctag">@author</span> guoji_z</div><div class="line"> * create on 2017/10/31 12:08</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ForkJoinSumCalculator</span> <span class="keyword">extends</span> <span class="title">RecursiveTask</span>&lt;<span class="title">Long</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> THRESHOLD = <span class="number">10_000</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">long</span>[] numbers;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> start;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> end;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ForkJoinSumCalculator</span><span class="params">(<span class="keyword">long</span>[] numbers, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.numbers = numbers;</div><div class="line">        <span class="keyword">this</span>.start = start;</div><div class="line">        <span class="keyword">this</span>.end = end;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> Long <span class="title">compute</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> length = end - start;</div><div class="line">        <span class="comment">//如果长度小于或等于阈值，计算，否则，递归拆分任务</span></div><div class="line">        <span class="keyword">if</span>(length &lt;= THRESHOLD) &#123;</div><div class="line">            <span class="keyword">return</span> computeSequentially();</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//利用另一个ForkJoinPool线程异步执行新创建的子任务，前半部分求和</span></div><div class="line">        ForkJoinSumCalculator leftTask = <span class="keyword">new</span> ForkJoinSumCalculator(numbers, start, start + length / <span class="number">2</span>);</div><div class="line">        leftTask.fork();</div><div class="line">        <span class="comment">//后半部分求和</span></div><div class="line">        ForkJoinSumCalculator rightTask = <span class="keyword">new</span> ForkJoinSumCalculator(numbers, start + length / <span class="number">2</span>, end);</div><div class="line">        <span class="comment">//同步执行第二个子任务</span></div><div class="line">        Long rightResult = rightTask.compute();</div><div class="line">        <span class="comment">//读取第一个任务的结果，如果未完成，就阻塞</span></div><div class="line">        Long leftResult = leftTask.join();</div><div class="line">        <span class="comment">//合并结果</span></div><div class="line">        <span class="keyword">return</span> leftResult + rightResult;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">long</span> <span class="title">computeSequentially</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">long</span> sum = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt; end; i++) &#123;</div><div class="line">            sum += numbers[i];</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> sum;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">forkJoinSum</span><span class="params">(<span class="keyword">long</span> n)</span> </span>&#123;</div><div class="line">        <span class="keyword">long</span>[] numbers = LongStream.rangeClosed(<span class="number">1</span>, n).toArray();</div><div class="line">        ForkJoinTask&lt;Long&gt; task = <span class="keyword">new</span> ForkJoinSumCalculator(numbers, <span class="number">0</span>, numbers.length);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ForkJoinPool().invoke(task);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="keyword">long</span> startTime  = System.currentTimeMillis();</div><div class="line">        System.out.println(forkJoinSum(<span class="number">10000</span>));</div><div class="line">        System.out.println(<span class="string">"Use time: "</span> + (System.currentTimeMillis() - startTime));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>核心：递归分解任务直到任务不可再分，双端队列，工作窃取算法</p>
 
       
     </div>
@@ -956,7 +1117,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-10-05"><span class="nav-number">2.</span> <span class="nav-text">2017-10-05</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows查看端口占用和杀进程"><span class="nav-number">2.1.</span> <span class="nav-text">windows查看端口占用和杀进程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-10-10"><span class="nav-number">3.</span> <span class="nav-text">2017-10-10</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java中的十个”单行代码编程”-One-Liner"><span class="nav-number">3.1.</span> <span class="nav-text">Java中的十个”单行代码编程”(One Liner)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对列表-数组中的每个元素都乘以2"><span class="nav-number">3.1.1.</span> <span class="nav-text">对列表/数组中的每个元素都乘以2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算集合-数组中的数字之和"><span class="nav-number">3.1.2.</span> <span class="nav-text">计算集合/数组中的数字之和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证字符串是否包含集合中的某一字符串"><span class="nav-number">3.1.3.</span> <span class="nav-text">验证字符串是否包含集合中的某一字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取文件内容"><span class="nav-number">3.1.4.</span> <span class="nav-text">读取文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出歌曲《Happy-Birthday-to-You-》-根据集合中不同的元素输出不同的字符串"><span class="nav-number">3.1.5.</span> <span class="nav-text">输出歌曲《Happy Birthday to You!》 - 根据集合中不同的元素输出不同的字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤并分组集合中的数字"><span class="nav-number">3.1.6.</span> <span class="nav-text">过滤并分组集合中的数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取并解析xml协议的Web-Service"><span class="nav-number">3.1.7.</span> <span class="nav-text">获取并解析xml协议的Web Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获得集合中最小-最大的数字"><span class="nav-number">3.1.8.</span> <span class="nav-text">获得集合中最小/最大的数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行处理"><span class="nav-number">3.1.9.</span> <span class="nav-text">并行处理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集合上的各种查询-LINQ-in-Java"><span class="nav-number">4.</span> <span class="nav-text">集合上的各种查询(LINQ in Java)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-10-17"><span class="nav-number">5.</span> <span class="nav-text">2017-10-17</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Jackson的-JsonFormat注解日期少一天问题"><span class="nav-number">5.1.</span> <span class="nav-text">Jackson的@JsonFormat注解日期少一天问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-10-18"><span class="nav-number">6.</span> <span class="nav-text">2017-10-18</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql如何解决幻读问题"><span class="nav-number">6.1.</span> <span class="nav-text">mysql如何解决幻读问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#官方文档"><span class="nav-number">6.1.1.</span> <span class="nav-text">官方文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验"><span class="nav-number">6.1.2.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mvcc"><span class="nav-number">6.2.</span> <span class="nav-text">mvcc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">6.3.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-MVCC简介"><span class="nav-number">6.4.</span> <span class="nav-text">MySQL MVCC简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是MVCC"><span class="nav-number">6.4.1.</span> <span class="nav-text">什么是MVCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVCC是为了解决什么问题"><span class="nav-number">6.4.2.</span> <span class="nav-text">MVCC是为了解决什么问题?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVCC实现"><span class="nav-number">6.4.3.</span> <span class="nav-text">MVCC实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体实现分析"><span class="nav-number">6.4.4.</span> <span class="nav-text">具体实现分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的小例子"><span class="nav-number">6.4.5.</span> <span class="nav-text">简单的小例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#INSERT"><span class="nav-number">6.4.5.1.</span> <span class="nav-text">INSERT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SELECT"><span class="nav-number">6.4.5.2.</span> <span class="nav-text">SELECT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DELETE"><span class="nav-number">6.4.5.3.</span> <span class="nav-text">DELETE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UPDATE"><span class="nav-number">6.4.5.4.</span> <span class="nav-text">UPDATE</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-10-23"><span class="nav-number">7.</span> <span class="nav-text">2017-10-23</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#《Java8实战》笔记"><span class="nav-number">7.1.</span> <span class="nav-text">《Java8实战》笔记</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-10-30"><span class="nav-number">8.</span> <span class="nav-text">2017-10-30</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#System-arraycooy"><span class="nav-number">8.1.</span> <span class="nav-text">System.arraycooy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CopyOnWrite"><span class="nav-number">8.2.</span> <span class="nav-text">CopyOnWrite</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">8.2.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析源码"><span class="nav-number">8.2.2.</span> <span class="nav-text">分析源码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#add-方法的源代码"><span class="nav-number">8.2.2.1.</span> <span class="nav-text">add()方法的源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-方法的源代码"><span class="nav-number">8.2.2.2.</span> <span class="nav-text">get()方法的源代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用场景"><span class="nav-number">8.2.3.</span> <span class="nav-text">使用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透露的思想"><span class="nav-number">8.3.</span> <span class="nav-text">透露的思想</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-10-05"><span class="nav-number">2.</span> <span class="nav-text">2017-10-05</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#windows查看端口占用和杀进程"><span class="nav-number">2.1.</span> <span class="nav-text">windows查看端口占用和杀进程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-10-10"><span class="nav-number">3.</span> <span class="nav-text">2017-10-10</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java中的十个”单行代码编程”-One-Liner"><span class="nav-number">3.1.</span> <span class="nav-text">Java中的十个”单行代码编程”(One Liner)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对列表-数组中的每个元素都乘以2"><span class="nav-number">3.1.1.</span> <span class="nav-text">对列表/数组中的每个元素都乘以2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算集合-数组中的数字之和"><span class="nav-number">3.1.2.</span> <span class="nav-text">计算集合/数组中的数字之和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证字符串是否包含集合中的某一字符串"><span class="nav-number">3.1.3.</span> <span class="nav-text">验证字符串是否包含集合中的某一字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取文件内容"><span class="nav-number">3.1.4.</span> <span class="nav-text">读取文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出歌曲《Happy-Birthday-to-You-》-根据集合中不同的元素输出不同的字符串"><span class="nav-number">3.1.5.</span> <span class="nav-text">输出歌曲《Happy Birthday to You!》 - 根据集合中不同的元素输出不同的字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过滤并分组集合中的数字"><span class="nav-number">3.1.6.</span> <span class="nav-text">过滤并分组集合中的数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取并解析xml协议的Web-Service"><span class="nav-number">3.1.7.</span> <span class="nav-text">获取并解析xml协议的Web Service</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获得集合中最小-最大的数字"><span class="nav-number">3.1.8.</span> <span class="nav-text">获得集合中最小/最大的数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并行处理"><span class="nav-number">3.1.9.</span> <span class="nav-text">并行处理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#集合上的各种查询-LINQ-in-Java"><span class="nav-number">4.</span> <span class="nav-text">集合上的各种查询(LINQ in Java)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-10-17"><span class="nav-number">5.</span> <span class="nav-text">2017-10-17</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Jackson的-JsonFormat注解日期少一天问题"><span class="nav-number">5.1.</span> <span class="nav-text">Jackson的@JsonFormat注解日期少一天问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-10-18"><span class="nav-number">6.</span> <span class="nav-text">2017-10-18</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql如何解决幻读问题"><span class="nav-number">6.1.</span> <span class="nav-text">mysql如何解决幻读问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#官方文档"><span class="nav-number">6.1.1.</span> <span class="nav-text">官方文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验"><span class="nav-number">6.1.2.</span> <span class="nav-text">实验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mvcc"><span class="nav-number">6.2.</span> <span class="nav-text">mvcc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">6.3.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-MVCC简介"><span class="nav-number">6.4.</span> <span class="nav-text">MySQL MVCC简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是MVCC"><span class="nav-number">6.4.1.</span> <span class="nav-text">什么是MVCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVCC是为了解决什么问题"><span class="nav-number">6.4.2.</span> <span class="nav-text">MVCC是为了解决什么问题?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVCC实现"><span class="nav-number">6.4.3.</span> <span class="nav-text">MVCC实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体实现分析"><span class="nav-number">6.4.4.</span> <span class="nav-text">具体实现分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的小例子"><span class="nav-number">6.4.5.</span> <span class="nav-text">简单的小例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#INSERT"><span class="nav-number">6.4.5.1.</span> <span class="nav-text">INSERT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SELECT"><span class="nav-number">6.4.5.2.</span> <span class="nav-text">SELECT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DELETE"><span class="nav-number">6.4.5.3.</span> <span class="nav-text">DELETE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UPDATE"><span class="nav-number">6.4.5.4.</span> <span class="nav-text">UPDATE</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-10-23"><span class="nav-number">7.</span> <span class="nav-text">2017-10-23</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#《Java8实战》笔记"><span class="nav-number">7.1.</span> <span class="nav-text">《Java8实战》笔记</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-10-30"><span class="nav-number">8.</span> <span class="nav-text">2017-10-30</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#System-arraycooy"><span class="nav-number">8.1.</span> <span class="nav-text">System.arraycooy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CopyOnWrite"><span class="nav-number">8.2.</span> <span class="nav-text">CopyOnWrite</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">8.2.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析源码"><span class="nav-number">8.2.2.</span> <span class="nav-text">分析源码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#add-方法的源代码"><span class="nav-number">8.2.2.1.</span> <span class="nav-text">add()方法的源代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#get-方法的源代码"><span class="nav-number">8.2.2.2.</span> <span class="nav-text">get()方法的源代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用场景"><span class="nav-number">8.2.3.</span> <span class="nav-text">使用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透露的思想"><span class="nav-number">8.3.</span> <span class="nav-text">透露的思想</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2017-10-31"><span class="nav-number">9.</span> <span class="nav-text">2017-10-31</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hibernate-Validator"><span class="nav-number">9.1.</span> <span class="nav-text">Hibernate Validator</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#类型"><span class="nav-number">9.1.1.</span> <span class="nav-text">类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用法"><span class="nav-number">9.1.2.</span> <span class="nav-text">用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ForkJoin"><span class="nav-number">9.2.</span> <span class="nav-text">ForkJoin</span></a></li></ol></li></ol></div>
             
 
           </div>
