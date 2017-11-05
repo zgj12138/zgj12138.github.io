@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zgj12138.github.io/blog/"/>
-  <updated>2017-10-31T15:17:36.124Z</updated>
+  <updated>2017-11-05T15:43:35.703Z</updated>
   <id>https://zgj12138.github.io/blog/</id>
   
   <author>
@@ -16,11 +16,47 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>学习总结2017-11</title>
+    <link href="https://zgj12138.github.io/blog/2017/11/05/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%932017-11/"/>
+    <id>https://zgj12138.github.io/blog/2017/11/05/学习总结2017-11/</id>
+    <published>2017-11-05T15:12:42.000Z</published>
+    <updated>2017-11-05T15:43:35.703Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>记录2017-11的学习总结</p>
+<h1 id="2017-11-05"><a href="#2017-11-05" class="headerlink" title="2017-11-05"></a>2017-11-05</h1><h2 id="TCP协议"><a href="#TCP协议" class="headerlink" title="TCP协议"></a>TCP协议</h2><p>  当网络通信时采用TCP协议时，在真正的读写操作之前，server与client之间必须建立一个连接，当读写操作完成后，双方不再需要这个连接时它们可以释放这个连接，连接的建立是需要三次握手的，而释放则需要四次挥手，所以说每个连接的建立都是需要资源消耗和时间消耗的，所以就有了长连接的避免频繁的建立和释放资源</p>
+<h2 id="长连接"><a href="#长连接" class="headerlink" title="长连接"></a>长连接</h2><p><strong>长连接：</strong><br>所谓长连接，指在一个TCP连接上可以连续发送多个数据包，在TCP连接保持期间，如果没有数据包发送，需要双方发检测包以维持此连接，一般需要自己做在线维持（不发生RST包和四次挥手）。<br>步骤：</p>
+<p>连接→数据传输→保持连接(心跳)→数据传输→保持连接(心跳)→……→关闭连接（一个TCP连接通道多个读写通信）；<br>这就要求长连接在没有数据通信时，定时发送数据包(心跳)，以维持连接状态；</p>
+<p>TCP保活功能，保活功能主要为服务器应用提供，服务器应用希望知道客户主机是否崩溃，从而可以代表客户使用资源。如果客户已经消失，使得服务器上保留一个半开放的连接，而服务器又在等待来自客户端的数据，则服务器将应远等待客户端的数据，保活功能就是试图在服务器端检测到这种半开放的连接。</p>
+<p>如果一个给定的连接在两小时内没有任何的动作，则服务器就向客户发一个探测报文段，客户主机必须处于以下4个状态之一：</p>
+<ul>
+<li>客户主机依然正常运行，并从服务器可达。客户的TCP响应正常，而服务器也知道对方是正常的，服务器在两小时后将保活定时器复位。</li>
+<li>客户主机已经崩溃，并且关闭或者正在重新启动。在任何一种情况下，客户的TCP都没有响应。服务端将不能收到对探测的响应，并在75秒后超时。服务器总共发送10个这样的探测 ，每个间隔75秒。如果服务器没有收到一个响应，它就认为客户主机已经关闭并终止连接。</li>
+<li>客户主机崩溃并已经重新启动。服务器将收到一个对其保活探测的响应，这个响应是一个复位，使得服务器终止这个连接。</li>
+<li>客户机正常运行，但是服务器不可达，这种情况与2类似，TCP能发现的就是没有收到探查的响应。</li>
+</ul>
+<h2 id="短连接"><a href="#短连接" class="headerlink" title="短连接"></a>短连接</h2><p><strong>短连接：</strong></p>
+<p>短连接是指通信双方有数据交互时，就建立一个TCP连接，数据发送完成后，则断开此TCP连接（管理起来比较简单，存在的连接都是有用的连接，不需要额外的控制手段）；<br>步骤：</p>
+<p>连接→数据传输→关闭连接；</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;记录2017-11的学习总结&lt;/p&gt;
+&lt;h1 id=&quot;2017-11-05&quot;&gt;&lt;a href=&quot;#2017-11-05&quot; class=&quot;he
+    
+    </summary>
+    
+      <category term="学习总结" scheme="https://zgj12138.github.io/blog/categories/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>学习总结 2017-10</title>
     <link href="https://zgj12138.github.io/blog/2017/10/05/%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%932017-10/"/>
     <id>https://zgj12138.github.io/blog/2017/10/05/学习总结2017-10/</id>
     <published>2017-10-05T12:30:00.000Z</published>
-    <updated>2017-10-31T15:17:36.124Z</updated>
+    <updated>2017-10-31T15:59:36.774Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>记录个人在10月的记录总结<br><a id="more"></a></p>
 <h1 id="2017-10-05"><a href="#2017-10-05" class="headerlink" title="2017-10-05"></a>2017-10-05</h1><h2 id="windows查看端口占用和杀进程"><a href="#windows查看端口占用和杀进程" class="headerlink" title="windows查看端口占用和杀进程"></a>windows查看端口占用和杀进程</h2><p>查看端口占用<br><code>netstat -aon|findstr &quot;49157&quot;</code></p>
@@ -39,7 +75,7 @@
 <h3 id="获取并解析xml协议的Web-Service"><a href="#获取并解析xml协议的Web-Service" class="headerlink" title="获取并解析xml协议的Web Service"></a>获取并解析xml协议的Web Service</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">FeedType feed = JAXB.unmarshal(new URL(&quot;http://search.twitter.com/search.atom?&amp;q=java8&quot;), FeedType.class);</div><div class="line">JAXB.marshal(feed, System.out);</div></pre></td></tr></table></figure>
 <h3 id="获得集合中最小-最大的数字"><a href="#获得集合中最小-最大的数字" class="headerlink" title="获得集合中最小/最大的数字"></a>获得集合中最小/最大的数字</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> min = Stream.of(<span class="number">14</span>, <span class="number">35</span>, -<span class="number">7</span>, <span class="number">46</span>, <span class="number">98</span>).reduce(Integer::min).get();</div><div class="line">min = Stream.of(<span class="number">14</span>, <span class="number">35</span>, -<span class="number">7</span>, <span class="number">46</span>, <span class="number">98</span>).min(Integer::compare).get();</div><div class="line">min = Stream.of(<span class="number">14</span>, <span class="number">35</span>, -<span class="number">7</span>, <span class="number">46</span>, <span class="number">98</span>).mapToInt(Integer::<span class="keyword">new</span>).min();</div><div class="line"></div><div class="line"><span class="keyword">int</span> max = Stream.of(<span class="number">14</span>, <span class="number">35</span>, -<span class="number">7</span>, <span class="number">46</span>, <span class="number">98</span>).reduce(Integer::max).get();</div><div class="line">max = Stream.of(<span class="number">14</span>, <span class="number">35</span>, -<span class="number">7</span>, <span class="number">46</span>, <span class="number">98</span>).max(Integer::compare).get();</div><div class="line">max = Stream.of(<span class="number">14</span>, <span class="number">35</span>, -<span class="number">7</span>, <span class="number">46</span>, <span class="number">98</span>).mapToInt(Integer::<span class="keyword">new</span>).max();</div></pre></td></tr></table></figure>
 <h3 id="并行处理"><a href="#并行处理" class="headerlink" title="并行处理"></a>并行处理</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">long</span> result = dataList.parallelStream().mapToInt(line -&gt; processItem(line)).sum();</div></pre></td></tr></table></figure>
-<h1 id="集合上的各种查询-LINQ-in-Java"><a href="#集合上的各种查询-LINQ-in-Java" class="headerlink" title="集合上的各种查询(LINQ in Java)"></a>集合上的各种查询(LINQ in Java)</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">List&lt;Album&gt; albums = Arrays.asList(unapologetic, tailgates, red);</div><div class="line"></div><div class="line"><span class="comment">//筛选出至少有一个track评级4分以上的专辑，并按照名称排序后打印出来。</span></div><div class="line">albums.stream()</div><div class="line">  .filter(a -&gt; a.tracks.stream().anyMatch(t -&gt; (t.rating &gt;= <span class="number">4</span>)))</div><div class="line">  .sorted(comparing(album -&gt; album.name))</div><div class="line">  .forEach(album -&gt; System.out.println(album.name));</div><div class="line"></div><div class="line"><span class="comment">//合并所有专辑的track</span></div><div class="line">List&lt;Track&gt; allTracks = albums.stream()</div><div class="line">  .flatMap(album -&gt; album.tracks.stream())</div><div class="line">  .collect(toList());</div><div class="line"></div><div class="line"><span class="comment">//根据track的评分对所有track分组</span></div><div class="line">Map&lt;Integer, List&lt;Track&gt;&gt; tracksByRating = allTracks.stream()</div><div class="line">  .collect(groupingBy(Track::getRating));</div></pre></td></tr></table></figure>
+<h3 id="集合上的各种查询-LINQ-in-Java"><a href="#集合上的各种查询-LINQ-in-Java" class="headerlink" title="集合上的各种查询(LINQ in Java)"></a>集合上的各种查询(LINQ in Java)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">List&lt;Album&gt; albums = Arrays.asList(unapologetic, tailgates, red);</div><div class="line"></div><div class="line"><span class="comment">//筛选出至少有一个track评级4分以上的专辑，并按照名称排序后打印出来。</span></div><div class="line">albums.stream()</div><div class="line">  .filter(a -&gt; a.tracks.stream().anyMatch(t -&gt; (t.rating &gt;= <span class="number">4</span>)))</div><div class="line">  .sorted(comparing(album -&gt; album.name))</div><div class="line">  .forEach(album -&gt; System.out.println(album.name));</div><div class="line"></div><div class="line"><span class="comment">//合并所有专辑的track</span></div><div class="line">List&lt;Track&gt; allTracks = albums.stream()</div><div class="line">  .flatMap(album -&gt; album.tracks.stream())</div><div class="line">  .collect(toList());</div><div class="line"></div><div class="line"><span class="comment">//根据track的评分对所有track分组</span></div><div class="line">Map&lt;Integer, List&lt;Track&gt;&gt; tracksByRating = allTracks.stream()</div><div class="line">  .collect(groupingBy(Track::getRating));</div></pre></td></tr></table></figure>
 <h1 id="2017-10-17"><a href="#2017-10-17" class="headerlink" title="2017-10-17"></a>2017-10-17</h1><h2 id="Jackson的-JsonFormat注解日期少一天问题"><a href="#Jackson的-JsonFormat注解日期少一天问题" class="headerlink" title="Jackson的@JsonFormat注解日期少一天问题"></a>Jackson的@JsonFormat注解日期少一天问题</h2><p>项目中使用了@JsonFormat来进行格式化日期，却意外发现日期少了一天，<br>比如数据库存的日期是2017-10-15,转成json则变成了2017-10-14<br>于是查资料，发现这个注解有个坑,JsonFormat默认是不带时区<br>解决办法:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@JsonFormat</span>(pattern=<span class="string">"yyyy-MM-dd"</span>)</div><div class="line"> <span class="function"><span class="keyword">public</span> Date <span class="title">getRegistDate</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.registDate;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
 <p>改成<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@JsonFormat</span>(pattern=<span class="string">"yyyy-MM-dd"</span>,timezone=<span class="string">"GMT+8"</span>)</div><div class="line"> <span class="function"><span class="keyword">public</span> Date <span class="title">getRegistDate</span><span class="params">()</span> </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.registDate;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
 <p>加上时区即可,中国是东八区</p>
